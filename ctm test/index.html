@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Приложение</title>
+		<link rel='stylesheet' href='css/normalize.css' type='text/css'>
+		<link rel='stylesheet' href='css/bootstrap.min.css' type='text/css'>
+		<link rel='stylesheet' href='css/style.css' type='text/css'>
+		<script src="./js/jquery-3.2.1.min.js"></script>
+		<script src="./js/knockout-3.4.2.js"></script>
+		<script src="./js/app.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Поиск пакетов</h1>
+			<div class="row">
+				<div class="col-md-6">
+			    	<form action="">
+			    		<div class="form-group">
+							<label for="">№ пакета</label>
+							<input type="text" class="form-control" data-bind="value:fileName">
+						</div>
+						<div class="form-group">
+							<label for="">Папка для поиска</label>
+							<input type="text" class="form-control" data-bind="value:fileSource">
+						</div>
+						<div class="form-group">
+							<button class="btn btn-default" data-bind="click: searchPackage">Найти пакет</button>
+						</div>
+			    	</form>
+	    		</div>
+				<div class="col-md-6">
+					<p>Лог запросов поиска пакетов</p>
+					<div class="table-responsive log__table-cnt">
+						<table class="table table-bordered" data-bind="visible: showFileContentTable">
+							<thead>
+								<tr>
+									<th>№ запроса</th>
+									<th>№ искомого пакета</th>
+									<th>Папка</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody data-bind="foreach: {data:logArray,as:'item'}">
+								<tr>
+									<td data-bind="text: ($index() + 1)"></td>
+									<td data-bind="text: item.number"></td>
+									<td data-bind="text: item.source"></td>
+									<td><button class="btn btn-default" data-bind="click:$root.showLogContentTable(item)">Показать</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-md-12">
+			    	<table class="table table-bordered" data-bind="visible: showFileContentTable">
+						<thead>
+							<tr>
+								<th>Дата/Время</th>
+								<th>№ пакета</th>
+								<th>Пользователь</th>
+								<th>Chain</th>
+								<th>Pack</th>
+								<th>Doc</th>
+								<th>Событие</th>
+								<th>Индексированные поля</th>
+							</tr>
+						</thead>
+						<tbody data-bind="foreach: {data:fileContentArray,as:'item'}">
+							<tr>
+								<td data-bind="text: item.evtime"></td>
+								<td data-bind="text: item.packnum"></td>
+								<td data-bind="text: item.username"></td>
+								<td data-bind="text: item.chain"></td>
+								<td data-bind="text: item.pack"></td>
+								<td data-bind="text: item.doc"></td>
+								<td data-bind="text: item.event"></td>
+								<td data-bind="text: item.keys"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+	    </div>
+	</body>
+</html>

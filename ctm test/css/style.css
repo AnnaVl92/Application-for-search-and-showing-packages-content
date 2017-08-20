@@ -1,0 +1,9 @@
+h1{
+	margin-bottom: 40px;
+}
+.log__table-cnt{
+	height: 200px;
+	overflow: auto;
+	margin-bottom: 20px;
+	padding-right: 10px;
+}
